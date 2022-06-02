@@ -263,28 +263,45 @@ fun generatePetition(){
 
     println("GENERAR UNA NUEVA PETICION")
 
-    var requiredQuantity : Double
+    val date = LocalDate.now().toString()
+
+    var partnersNeeded:Int
     do{
-        print("Cantidad necesaria de sangre [Litros]: ")
-        requiredQuantity = readLine()!!.toDouble()
-    }while (requiredQuantity < 0)
+        print("Cantidad de dadores: ")
+        partnersNeeded = readLine()!!.toInt()
+    }while (partnersNeeded == 0)
 
-    val date = LocalDate.now()
+    var bloodGroup:String
+    do{
+        print("Grupo sanguineo(A,B,AB,0): ")
+        bloodGroup = readLine().toString()
 
-    val partnersNeeded = requiredQuantity / 0.50
+    }while(bloodGroup != "A" && bloodGroup != "B" && bloodGroup != "AB" && bloodGroup != "0")
 
-    val petition = Petition(requiredQuantity, partnersNeeded.toInt(),date.toString())
+    var bloodFactor : String
+    do{
+        print("Factor(+,-): ")
+        bloodFactor = readLine().toString()
+
+    }while(bloodFactor != "+" && bloodFactor != "-")
+
+
+    print("Fecha de entrega (dd/mm/aaaa): ")
+    val deliveryDate = readLine().toString()
+
+    val petition = Petition(partnersNeeded, date,bloodGroup,bloodFactor,deliveryDate)
 
     println("\n¡Peticion generada exitosamente!")
-    println("Cantidad necesaria: ${requiredQuantity} L")
-    println("Socios necesarios: ${partnersNeeded.toInt()}")
     println("Fecha: $date")
+    println("Socios necesarios: $partnersNeeded ")
+    println("Grupo  y factor sanguineo: $bloodGroup $bloodFactor")
+    println("Fecha de entrega: $deliveryDate")
 
-    val selectedPartners = definePartners(partnersNeeded.toInt())
+    val selectedPartners = definePartners(partnersNeeded)
 
-    if(selectedPartners.size < partnersNeeded.toInt()){
-        println("NO HAY SUFICIENTES SOCIOS DISPONIBLES PARA COMPLETAR LA DONACION")
-        println("Faltan: ${partnersNeeded.toInt() - selectedPartners.size} socios")
+    if(selectedPartners.size < partnersNeeded){
+        println("\n\nNO HAY SUFICIENTES SOCIOS DISPONIBLES PARA COMPLETAR LA DONACION")
+        println("Faltan: ${partnersNeeded - selectedPartners.size} socios")
         println("SOCIOS DISPONIBLES")
         for(partner in selectedPartners){
             println("${partner.name} ${partner.surname} - ${partner.dni}")
