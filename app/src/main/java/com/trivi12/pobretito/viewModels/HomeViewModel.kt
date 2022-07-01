@@ -14,6 +14,14 @@ import com.trivi12.pobretito.SignInActivity
 class HomeViewModel(private val context:Context):ViewModel() {
 
 
+    fun saveSession(email:String,password:String){
+
+        val prefs = context.getSharedPreferences(context.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs.putString("email",email)
+        prefs.putString("password",password)
+        prefs.apply()
+    }
+
     fun logOut(){
         FirebaseAuth.getInstance().signOut()
         goLogIn()
@@ -21,6 +29,7 @@ class HomeViewModel(private val context:Context):ViewModel() {
 
     fun goLogIn(){
         val logInIntent = Intent(context, LoginActivity::class.java)
+        logInIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(logInIntent)
     }
 

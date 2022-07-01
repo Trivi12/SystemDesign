@@ -73,8 +73,8 @@ class SignInViewModel(private val context:Context):ViewModel() {
 
     fun showAlert(){
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error")
+        builder.setTitle("Ha ocurrido un error")
+        builder.setMessage("Usuario ya existente. Por favor inicie sesion")
         builder.setPositiveButton("Aceptar", null)
         val dialog:AlertDialog = builder.create()
         dialog.show()
@@ -85,6 +85,7 @@ class SignInViewModel(private val context:Context):ViewModel() {
             putExtra("email",email)
             putExtra("password",password)
         }
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
     }
 }

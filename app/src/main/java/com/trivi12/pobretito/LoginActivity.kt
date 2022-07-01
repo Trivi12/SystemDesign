@@ -21,13 +21,10 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = LoginViewModel(this)
 
-        val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString("email",null)
-        val password = prefs.getString("password",null)
+        val session = viewModel!!.getSession()
 
-            if(email != null && password != null){
+        if(session){
             binding.loginLayout.visibility = View.INVISIBLE
-            viewModel!!.goHome(email,password)
         }
 
         binding.btnLogIn.setOnClickListener {
@@ -41,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
         setupEditText()
 
         binding.btnSignIn.setOnClickListener {
-
             viewModel!!.goSignIn()
         }
     }

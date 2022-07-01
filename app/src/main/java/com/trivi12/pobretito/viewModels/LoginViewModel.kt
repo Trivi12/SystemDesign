@@ -3,6 +3,8 @@ package com.trivi12.pobretito.viewModels
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.provider.Settings.Global.getString
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -56,18 +58,33 @@ class LoginViewModel(private val context:Context):ViewModel() {
 
     }
 
+    fun getSession():Boolean{
+        val prefs = context.getSharedPreferences(context.getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val email = prefs.getString("email",null)
+        val password = prefs.getString("password",null)
+
+        if(email != null && password != null){
+            goHome(email,password)
+            return true
+        }
+
+        return false
+    }
+
     fun goHome(email: String,password: String){
         val homeIntent = Intent(context, HomeActivity::class.java).apply {
             putExtra("email",email)
             putExtra("password",password)
         }
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
+
     }
 
     fun showAlert(){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Ha ocurrido un error")
-        builder.setMessage("")
+        builder.setMessage("Puede que los datos ingresados no sean correctos, o que el usuario no exista")
         builder.setPositiveButton("error", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
