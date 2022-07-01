@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PobreTITO</string>
+    <string name="error_message">Este campo es obligatorio</string>
+    <string name="prefs_file">com.trivi12.pobretito.PREFERENCE_FILE_KEY</string>
+</resources>

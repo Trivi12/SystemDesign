@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "307100350038",
+    "project_id": "pobretito-2022",
+    "storage_bucket": "pobretito-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307100350038:android:5ffc2d20f0d190f4a2edf7",
+        "android_client_info": {
+          "package_name": "com.trivi12.pobretito"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307100350038-a72me0d2hioomejokdglmiabbsm6edlh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trivi12.pobretito",
+            "certificate_hash": "5f28c30becb91c96bbb343f991f3d1c4167bcdd6"
+          }
+        },
+        {
+          "client_id": "307100350038-lu3tr70g3mfd7mg68rgis7bh82k471cv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkyJfPhfD-wYcnDjDcRSesDDJjBU4pa6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307100350038-lu3tr70g3mfd7mg68rgis7bh82k471cv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
