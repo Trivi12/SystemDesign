@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import com.google.firebase.ktx.Firebase
 import com.trivi12.pobretito.databinding.ActivityHomeBinding
 import com.trivi12.pobretito.viewModels.HomeViewModel
@@ -12,6 +14,7 @@ class HomeActivity : AppCompatActivity() {
 
     private var viewModel: HomeViewModel? = null
     private lateinit var binding : ActivityHomeBinding
+    private var menu: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +30,31 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel!!.saveSession(email.toString(),password.toString())
 
-        binding.btnLogOut.setOnClickListener {
-            val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-            prefs.clear()
-            prefs.apply()
-            viewModel!!.logOut()
+        // Funcion para la barra de navegacion inferior
+        /*binding!!.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.btnHistory ->{}*/
+
+        binding.btnAdd.setOnClickListener {
+            viewModel!!.goIncident()
         }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        this.menu = menu
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.logOut ->{
+                viewModel!!.logOut()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

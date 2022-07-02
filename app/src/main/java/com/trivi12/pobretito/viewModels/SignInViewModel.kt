@@ -42,7 +42,7 @@ class SignInViewModel(private val context:Context):ViewModel() {
             }
 
             if(dataValidation.isSuccessfully()){
-                createUser(dni,name,surname,email,password)
+                createUser(dni,name,surname,email)
                 signIn(email,password)
             }
             else{
@@ -55,14 +55,13 @@ class SignInViewModel(private val context:Context):ViewModel() {
 
 
 
-    fun createUser(dni:String,name:String,surname: String, email:String,password:String){
+    fun createUser(dni:String,name:String,surname: String, email:String){
 
         val db = FirebaseFirestore.getInstance()
         db.collection("users").document(dni).set(
             hashMapOf("name" to name,
                 "surname" to surname,
-                "email" to email,
-                "password" to password)
+                "email" to email)
         )
     }
 

@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:hint="DNI"
         app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="8"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
