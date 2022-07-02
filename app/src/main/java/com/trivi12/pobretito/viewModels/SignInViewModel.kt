@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.trivi12.pobretito.HomeActivity
 import com.trivi12.pobretito.R
 import com.trivi12.pobretito.commons.DataValidator
@@ -56,8 +57,13 @@ class SignInViewModel(private val context:Context):ViewModel() {
 
     fun createUser(dni:String,name:String,surname: String, email:String,password:String){
 
-        //guardar los datos del usuario en la base de datos
-
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users").document(dni).set(
+            hashMapOf("name" to name,
+                "surname" to surname,
+                "email" to email,
+                "password" to password)
+        )
     }
 
     fun signIn(email:String, password: String){
