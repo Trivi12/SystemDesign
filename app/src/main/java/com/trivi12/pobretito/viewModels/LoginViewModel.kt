@@ -22,66 +22,72 @@ class LoginViewModel(private val context:Context):ViewModel() {
 
     var dataValidationMutable = MutableLiveData<DataValidator?>()
 
-    fun validateUserData(email:String,password:String){
+    fun validateUserData(email: String, password: String) {
 
-        viewModelScope.launch{
+        viewModelScope.launch {
             var dataValidation = DataValidator()
 
-            if(!email.validateText()){
+            if (!email.validateText()) {
                 dataValidation.emailError = context.getString(R.string.error_message)
             }
-            if(!password.validateText()){
+            if (!password.validateText()) {
                 dataValidation.passwordError = context.getString(R.string.error_message)
             }
 
-            if(dataValidation.isSuccessfully()){
-                logIn(email,password)
-            }
-            else{
-                Toast.makeText(context,"Por favor, ingrese todos sus datos",Toast.LENGTH_LONG).show()
+            if (dataValidation.isSuccessfully()) {
+                logIn(email, password)
+            } else {
+                Toast.makeText(context, "Por favor, ingrese todos sus datos", Toast.LENGTH_LONG)
+                    .show()
             }
 
             dataValidationMutable.value = dataValidation
         }
     }
 
-    fun logIn(email:String, password:String){
+    fun logIn(email: String, password: String) {
 
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener{
-            if(it.isSuccessful){
-                Toast.makeText(context,"Sesion iniciada correctamente", Toast.LENGTH_LONG).show()
-                goHome(email,password)
-            }else{
-                showAlert()
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "Sesion iniciada correctamente", Toast.LENGTH_LONG)
+                        .show()
+                    goHome(it.result?.user?.email ?:"", password)
+                } else {
+                    showAlert()
+                }
             }
-        }
 
     }
 
-    fun getSession():Boolean{
-        val prefs = context.getSharedPreferences(context.getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString("email",null)
-        val password = prefs.getString("password",null)
+    fun getSession(): Boolean {
+        val prefs = context.getSharedPreferences(
+            context.getString(R.string.prefs_file),
+            Context.MODE_PRIVATE)
 
-        if(email != null && password != null){
+        val email = prefs.getString("email", null)
+        val password = prefs.getString("password", null)
+        println("GETSESSION EMAIL..${email}")
+        println("GETSESSION PASS.. ${password}")
+
+        if (email != null && password != null) {
             goHome(email,password)
             return true
         }
-
         return false
     }
 
-    fun goHome(email: String,password: String){
+    fun goHome(email: String, password: String) {
         val homeIntent = Intent(context, HomeActivity::class.java).apply {
-            putExtra("email",email)
-            putExtra("password",password)
+            putExtra("email", email)
+            putExtra("password", password)
         }
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
 
     }
 
-    fun showAlert(){
+    fun showAlert() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Ha ocurrido un error")
         builder.setMessage("Puede que los datos ingresados no sean correctos, o que el usuario no exista")
@@ -90,8 +96,8 @@ class LoginViewModel(private val context:Context):ViewModel() {
         dialog.show()
     }
 
-    fun goSignIn(){
-        val signInIntent = Intent(context,SignInActivity::class.java)
+    fun goSignIn() {
+        val signInIntent = Intent(context, SignInActivity::class.java)
         context.startActivity(signInIntent)
     }
 }

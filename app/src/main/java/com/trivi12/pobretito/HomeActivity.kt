@@ -27,6 +27,8 @@ class HomeActivity : AppCompatActivity() {
         val bundle = intent.extras
         val email= bundle?.getString("email")
         val password= bundle?.getString("password")
+        println("homeEMAIL..${email.toString()}")
+        println("homePASS..${password.toString()}")
 
         viewModel!!.saveSession(email.toString(),password.toString())
 
@@ -36,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.btnHistory ->{}*/
 
         binding.btnAdd.setOnClickListener {
-            viewModel!!.goIncident()
+            viewModel!!.goIncident(email.toString())
         }
 
     }
@@ -52,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
 
         when(item.itemId){
             R.id.logOut ->{
-                viewModel!!.logOut()
+                viewModel!!.showAlert()
             }
         }
         return super.onOptionsItemSelected(item)

@@ -58,10 +58,10 @@ class SignInViewModel(private val context:Context):ViewModel() {
     fun createUser(dni:String,name:String,surname: String, email:String){
 
         val db = FirebaseFirestore.getInstance()
-        db.collection("users").document(dni).set(
+        db.collection("users").document(email).set(
             hashMapOf("name" to name,
                 "surname" to surname,
-                "email" to email)
+                "dni" to dni)
         )
     }
 
@@ -69,7 +69,7 @@ class SignInViewModel(private val context:Context):ViewModel() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
             if(it.isSuccessful){
                 Toast.makeText(context,"Usuario creado con exito",Toast.LENGTH_LONG).show()
-                goHome(email,password)
+                goHome(it.result?.user?.email ?:"",password)
             }else{
                 showAlert()
             }

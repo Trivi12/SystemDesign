@@ -27,20 +27,20 @@ class HomeViewModel(private val context:Context):ViewModel() {
 
     fun logOut(){
 
-        showAlert()
-
         val prefs = context.getSharedPreferences(context.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         prefs.clear()
         prefs.apply()
 
         FirebaseAuth.getInstance().signOut()
+
+        goLogIn()
     }
 
     fun showAlert(){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Cerrar Sesion")
         builder.setMessage("¿Desea cerrar sesion?")
-        builder.setPositiveButton("Aceptar"){dialog,wich -> goLogIn()}
+        builder.setPositiveButton("Aceptar"){dialog,wich -> logOut()}
         builder.setNegativeButton("Cancelar",null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
@@ -52,8 +52,10 @@ class HomeViewModel(private val context:Context):ViewModel() {
         context.startActivity(logInIntent)
     }
 
-    fun goIncident(){
-        val incidentIntent = Intent(context,IncidentActivity::class.java)
+    fun goIncident(email:String){
+        val incidentIntent = Intent(context,IncidentActivity::class.java).apply {
+            putExtra("email",email)
+        }
         context.startActivity(incidentIntent)
     }
 
