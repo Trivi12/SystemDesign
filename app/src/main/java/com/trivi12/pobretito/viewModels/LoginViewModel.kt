@@ -52,7 +52,7 @@ class LoginViewModel(private val context:Context):ViewModel() {
                 if (it.isSuccessful) {
                     Toast.makeText(context, "Sesion iniciada correctamente", Toast.LENGTH_LONG)
                         .show()
-                    goHome(it.result?.user?.email ?:"", password)
+                    goHome(email, password)
                 } else {
                     showAlert()
                 }
@@ -78,10 +78,10 @@ class LoginViewModel(private val context:Context):ViewModel() {
     }
 
     fun goHome(email: String, password: String) {
-        val homeIntent = Intent(context, HomeActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("password", password)
-        }
+        val homeIntent = Intent(context, HomeActivity::class.java)
+        homeIntent.putExtra("email", email)
+        homeIntent.putExtra("password", password)
+
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
 

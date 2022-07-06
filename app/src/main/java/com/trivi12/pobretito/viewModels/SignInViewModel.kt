@@ -69,7 +69,7 @@ class SignInViewModel(private val context:Context):ViewModel() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
             if(it.isSuccessful){
                 Toast.makeText(context,"Usuario creado con exito",Toast.LENGTH_LONG).show()
-                goHome(it.result?.user?.email ?:"",password)
+                goHome(email,password)
             }else{
                 showAlert()
             }

@@ -21,12 +21,6 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = LoginViewModel(this)
 
-        val session = viewModel!!.getSession()
-
-        if(session){
-            binding.loginLayout.visibility = View.INVISIBLE
-        }
-
         binding.btnLogIn.setOnClickListener {
 
             viewModel!!.validateUserData(
@@ -39,6 +33,12 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnSignIn.setOnClickListener {
             viewModel!!.goSignIn()
+        }
+
+        val session = viewModel!!.getSession()
+
+        if(session){
+            binding.loginLayout.visibility = View.INVISIBLE
         }
     }
 
