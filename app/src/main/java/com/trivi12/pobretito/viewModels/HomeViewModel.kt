@@ -53,9 +53,8 @@ class HomeViewModel(private val context:Context):ViewModel() {
     }
 
     fun goIncident(email:String){
-        val incidentIntent = Intent(context,IncidentActivity::class.java).apply {
-            putExtra("email",email)
-        }
+        val incidentIntent = Intent(context,IncidentActivity::class.java)
+        incidentIntent.putExtra("email",email)
         context.startActivity(incidentIntent)
     }
 

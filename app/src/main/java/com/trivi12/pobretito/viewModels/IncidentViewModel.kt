@@ -17,6 +17,7 @@ import com.trivi12.pobretito.commons.validateText
 import com.trivi12.pobretito.models.Category
 import com.trivi12.pobretito.models.Condition
 import kotlinx.coroutines.launch
+import java.util.*
 
 class IncidentViewModel(private val context: Context):ViewModel() {
 
@@ -53,7 +54,8 @@ class IncidentViewModel(private val context: Context):ViewModel() {
 
         val db = FirebaseFirestore.getInstance()
 
-        val num = (0..99999).random().toString()
+        val random = Random()
+        val num = random.nextInt(99999 - 0).toString()
 
         val condition = Condition.ENVIADO.toString()
 
@@ -65,14 +67,14 @@ class IncidentViewModel(private val context: Context):ViewModel() {
                 "user" to email)
         )
 
-        showAlert(num)
+        showAlert(num,email)
     }
 
-    fun showAlert(num:String){
+    fun showAlert(num:String,email:String){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Reclamo generado con exito")
         builder.setMessage("El reclamo fue generado con el numero ${num}")
-        builder.setPositiveButton("Aceptar"){dialog,wich -> goHome()}
+        builder.setPositiveButton("Aceptar"){dialog,wich -> goHome(email)}
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
@@ -89,8 +91,9 @@ class IncidentViewModel(private val context: Context):ViewModel() {
         dialog.show()
     }
 
-    fun goHome(){
+    fun goHome(email: String){
         val homeIntent = Intent(context,HomeActivity::class.java)
+        homeIntent.putExtra("email",email)
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
     }

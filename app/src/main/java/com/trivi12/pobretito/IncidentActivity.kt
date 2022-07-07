@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -27,6 +28,11 @@ class IncidentActivity : AppCompatActivity() {
 
         viewModel = IncidentViewModel(this)
 
+        if (supportActionBar != null) {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+
+
         val bundle = intent.extras
         val email = bundle?.getString("email")
         println("IncidentEMAIL..${email.toString()}")
@@ -40,6 +46,11 @@ class IncidentActivity : AppCompatActivity() {
         }
         setupViewModelObserver()
         setupEditText()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId === android.R.id.home) { onBackPressed() }
+        return super.onOptionsItemSelected(item)
     }
 
     fun setUpView(){
