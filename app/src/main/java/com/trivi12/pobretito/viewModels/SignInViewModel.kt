@@ -69,11 +69,20 @@ class SignInViewModel(private val context:Context):ViewModel() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
             if(it.isSuccessful){
                 Toast.makeText(context,"Usuario creado con exito",Toast.LENGTH_LONG).show()
-                goHome(email,password)
+                saveSession(email,password)
+                goHome()
             }else{
                 showAlert()
             }
         }
+    }
+
+    fun saveSession(email:String,password:String){
+
+        val prefs = context.getSharedPreferences(context.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs.putString("email",email)
+        prefs.putString("password",password)
+        prefs.apply()
     }
 
     fun showAlert(){
@@ -85,11 +94,8 @@ class SignInViewModel(private val context:Context):ViewModel() {
         dialog.show()
     }
 
-    fun goHome(email: String,password: String){
-        val homeIntent = Intent(context, HomeActivity::class.java).apply {
-            putExtra("email",email)
-            putExtra("password",password)
-        }
+    fun goHome(){
+        val homeIntent = Intent(context, HomeActivity::class.java)
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
     }

@@ -35,11 +35,6 @@ class LoginActivity : AppCompatActivity() {
             viewModel!!.goSignIn()
         }
 
-        val session = viewModel!!.getSession()
-
-        if(session){
-            binding.loginLayout.visibility = View.INVISIBLE
-        }
     }
 
     override fun onStart() {

@@ -24,18 +24,19 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel = HomeViewModel(this)
 
-        val bundle = intent.extras
-        val email= bundle?.getString("email")
-        val password= bundle?.getString("password")
-        println("homeEMAIL..${email.toString()}")
-        println("homePASS..${password.toString()}")
+        title = "Inicio"
 
-        viewModel!!.saveSession(email.toString(),password.toString())
+        val email = viewModel!!.getSession()
 
-        // Funcion para la barra de navegacion inferior
-        /*binding!!.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-            when(item.itemId){
-                R.id.btnHistory ->{}*/
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+
+                R.id.btnHistory -> {
+                    viewModel!!.goHistory(email)
+                    true}
+                else -> false
+            }
+        }
 
         binding.btnAdd.setOnClickListener {
             viewModel!!.goIncident(email.toString())

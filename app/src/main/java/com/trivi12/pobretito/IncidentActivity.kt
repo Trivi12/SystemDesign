@@ -1,17 +1,16 @@
 package com.trivi12.pobretito
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.trivi12.pobretito.databinding.ActivityHomeBinding
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import com.trivi12.pobretito.databinding.ActivityIncidentBinding
-import com.trivi12.pobretito.viewModels.HomeViewModel
 import com.trivi12.pobretito.viewModels.IncidentViewModel
+
 
 class IncidentActivity : AppCompatActivity() {
 
@@ -35,7 +34,6 @@ class IncidentActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         val email = bundle?.getString("email")
-        println("IncidentEMAIL..${email.toString()}")
 
         setUpView()
 
@@ -46,6 +44,7 @@ class IncidentActivity : AppCompatActivity() {
         }
         setupViewModelObserver()
         setupEditText()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -14,12 +14,24 @@
         android:theme="@style/Theme.PobreTITO"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="false"/>
+        <activity
             android:name=".IncidentActivity"
             android:exported="false"
             android:noHistory="true"/>
         <activity
             android:name=".HomeActivity"
-            android:exported="false"/>
+            android:exported="true">
+
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".SignInActivity"
             android:exported="false"
@@ -28,11 +40,7 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

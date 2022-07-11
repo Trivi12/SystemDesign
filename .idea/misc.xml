@@ -6,12 +6,15 @@
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/drawable-v24/ic_history.xml" value="0.1225" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/drawable/ic_add.xml" value="0.1225" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/drawable/ic_log_put.xml" value="0.1225" />
+        <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_history.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_home.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_incident.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_log_in.xml" value="0.25" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_main.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_sign_in.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/activity_welcome.xml" value="0.264" />
+        <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/card_incident_item.xml" value="0.2128623188405797" />
+        <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/history_card.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/layout/item_category.xml" value="0.2128623188405797" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.458984375" />
         <entry key="..\:/Users/OPERADOR/Documents/PobreTITO/app/src/main/res/menu/toolbar_menu.xml" value="0.25416666666666665" />

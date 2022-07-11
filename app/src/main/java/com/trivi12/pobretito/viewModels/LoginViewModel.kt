@@ -52,36 +52,24 @@ class LoginViewModel(private val context:Context):ViewModel() {
                 if (it.isSuccessful) {
                     Toast.makeText(context, "Sesion iniciada correctamente", Toast.LENGTH_LONG)
                         .show()
-                    goHome(email, password)
+                    goHome()
                 } else {
                     showAlert()
                 }
             }
 
+        saveSession(email,password)
     }
 
-    fun getSession(): Boolean {
-        val prefs = context.getSharedPreferences(
-            context.getString(R.string.prefs_file),
-            Context.MODE_PRIVATE)
-
-        val email = prefs.getString("email", null)
-        val password = prefs.getString("password", null)
-        println("GETSESSION EMAIL..${email}")
-        println("GETSESSION PASS.. ${password}")
-
-        if (email != null && password != null) {
-            goHome(email,password)
-            return true
-        }
-        return false
+    fun saveSession(email:String,password:String){
+        val prefs = context.getSharedPreferences(context.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+        prefs.putString("email",email)
+        prefs.putString("password",password)
+        prefs.apply()
     }
 
-    fun goHome(email: String, password: String) {
+    fun goHome() {
         val homeIntent = Intent(context, HomeActivity::class.java)
-        homeIntent.putExtra("email", email)
-        homeIntent.putExtra("password", password)
-
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
 

@@ -17,6 +17,7 @@ import com.trivi12.pobretito.commons.validateText
 import com.trivi12.pobretito.models.Category
 import com.trivi12.pobretito.models.Condition
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 class IncidentViewModel(private val context: Context):ViewModel() {
@@ -56,15 +57,16 @@ class IncidentViewModel(private val context: Context):ViewModel() {
 
         val random = Random()
         val num = random.nextInt(99999 - 0).toString()
-
         val condition = Condition.ENVIADO.toString()
+        val date = setupDate()
 
         db.collection("incidents").document(num).set(
             hashMapOf("category" to category,
                 "description" to description,
                 "address" to address,
                 "condition" to condition,
-                "user" to email)
+                "user" to email,
+                "date" to date)
         )
 
         showAlert(num,email)
@@ -74,7 +76,7 @@ class IncidentViewModel(private val context: Context):ViewModel() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Reclamo generado con exito")
         builder.setMessage("El reclamo fue generado con el numero ${num}")
-        builder.setPositiveButton("Aceptar"){dialog,wich -> goHome(email)}
+        builder.setPositiveButton("Aceptar"){dialog,wich -> goHome()}
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
@@ -91,11 +93,16 @@ class IncidentViewModel(private val context: Context):ViewModel() {
         dialog.show()
     }
 
-    fun goHome(email: String){
+    fun goHome(){
         val homeIntent = Intent(context,HomeActivity::class.java)
-        homeIntent.putExtra("email",email)
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         context.startActivity(homeIntent)
+    }
+
+    fun setupDate():String{
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val date = simpleDateFormat.format(Calendar.getInstance().time)
+        return date
     }
 
 }
