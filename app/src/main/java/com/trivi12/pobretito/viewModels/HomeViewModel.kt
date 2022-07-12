@@ -1,14 +1,14 @@
 package com.trivi12.pobretito.viewModels
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.provider.Settings.Global.getString
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.FirebaseFirestore
 import com.trivi12.pobretito.*
+import com.trivi12.pobretito.models.User
 
 class HomeViewModel(private val context:Context):ViewModel() {
 

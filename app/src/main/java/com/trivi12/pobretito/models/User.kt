@@ -1,8 +1,19 @@
 package com.trivi12.pobretito.models
 
-data class User (private val dni : String,
-                 private val name: String,
-                 private val surname:String,
-                 private val email: String,
-                 private val password: String) {
+import com.google.firebase.firestore.QueryDocumentSnapshot
+
+
+data class User(val document: QueryDocumentSnapshot) {
+
+    var dni : String? = null
+    var name: String? = null
+    var surname:String? = null
+    var email: String? = null
+
+    init {
+        this.email = document.id
+        this.dni = document.getString("dni")
+        this.name = document.getString("name")
+        this.surname = document.getString("surname")
+    }
 }
