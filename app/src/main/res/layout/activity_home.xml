@@ -19,6 +19,16 @@
         android:textStyle="italic"
         android:textColor="@color/dark_grey"/>
 
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="8dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -33,8 +43,9 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="36dp"
         android:layout_marginBottom="72dp"
-        android:backgroundTint="@color/purple_500"
-        app:srcCompat="@drawable/ic_add"/>
+        android:backgroundTint="@color/accent"
+        app:srcCompat="@drawable/ic_add"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -44,7 +55,7 @@
         app:menu="@menu/bottom_navigation_menu"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:background="@color/purple_500"
+        android:background="@color/primary"
         app:itemTextColor="@color/white"/>
 
 

@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.ktx.Firebase
 import com.trivi12.pobretito.databinding.ActivityHomeBinding
+import com.trivi12.pobretito.models.User
 import com.trivi12.pobretito.viewModels.HomeViewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -16,6 +17,8 @@ class HomeActivity : AppCompatActivity() {
     private var viewModel: HomeViewModel? = null
     private lateinit var binding : ActivityHomeBinding
     private var menu: Menu? = null
+
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,14 @@ class HomeActivity : AppCompatActivity() {
 
         val email = viewModel!!.getSession()
 
+        viewModel!!.user.observe(this){ user ->
+            this.user = user as User
+            binding.tvUser.text = "Usuario: ${user.name} ${user.surname}"
+        }
+        viewModel!!.getUser(email)
+
+
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
 
@@ -40,9 +51,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.btnAdd.setOnClickListener {
-            viewModel!!.goIncident(email.toString())
+            viewModel!!.goIncident(email)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -9,4 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#757575</color>
     <color name="dark_grey">#616161</color>
+    <color name="primary">#FF5722</color>
+    <color name="primary_dark">#E64A19</color>
+    <color name="primary_light">#FFCCBC</color>
+    <color name="accent">#00BCD4</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="red">#e53935</color>
 </resources>

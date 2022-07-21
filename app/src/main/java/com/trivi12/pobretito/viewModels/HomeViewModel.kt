@@ -3,14 +3,20 @@ package com.trivi12.pobretito.viewModels
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.getField
+import com.google.firebase.firestore.ktx.toObject
 import com.trivi12.pobretito.*
 import com.trivi12.pobretito.models.User
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val context:Context):ViewModel() {
+
+    val user = MutableLiveData<User?>()
 
     fun getSession():String{
         val prefs = context.getSharedPreferences(
@@ -24,6 +30,22 @@ class HomeViewModel(private val context:Context):ViewModel() {
             goLogIn()
         }
         return email.toString()
+    }
+
+    fun getUser(email: String){
+
+        var us:User? = null
+        val db = FirebaseFirestore.getInstance()
+
+        viewModelScope.launch {
+            db.collection("users").document(email)
+                .get()
+                .addOnSuccessListener { document ->
+                    us = User(document)
+                    user.value = us
+                }
+        }
+
     }
 
     fun logOut(){
